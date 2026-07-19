@@ -290,15 +290,13 @@ void Engine_Run(void) {
 
 void Engine_SetState(GameState state) {
     if (state == GS_PLAYING && g_engine.state != GS_PLAYING) {
-        /* Spawn test enemies in open corridor areas */
-        Vec2 e1 = { 6.0f, 4.0f };   /* In horizontal corridor */
-        Vec2 e2 = { 8.0f, 4.0f };   /* In horizontal corridor */
-        Vec2 e3 = { 10.0f, 7.0f };  /* In vertical corridor */
-        Vec2 e4 = { 10.0f, 9.0f };  /* In vertical corridor */
+        /* Spawn test enemies in the horizontal corridor at y=4 */
+        Vec2 e1 = { 5.0f, 4.0f };
+        Vec2 e2 = { 8.0f, 4.0f };
+        Vec2 e3 = { 11.0f, 4.0f };
         Enemy_Spawn(&e1, 0);
         Enemy_Spawn(&e2, 0);
         Enemy_Spawn(&e3, 0);
-        Enemy_Spawn(&e4, 0);
     }
     g_engine.state = state;
 }

@@ -17,49 +17,41 @@ bool CameraSystem_Init(void) {
     g_cam.fov = MK_FOV * MK_DEG2RAD;
     g_cam.zoom = 1.0f;
 
-    /* Setup a simple test rail path within the corridor */
+    /* Setup a simple straight horizontal rail path in corridor at y=4 */
     RailPath_Init(&g_railPath);
     RailPath_Reset(&g_railPath);
 
-    /* Node 0: Start at left side of corridor */
-    RailNode n0 = { {3.0f, 4.0f}, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, RAIL_WAIT, -1, "start" };
+    /* Node 0: Start at left side */
+    RailNode n0 = { {2.0f, 4.0f}, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, RAIL_WAIT, -1, "start" };
     RailPath_AddNode(&g_railPath, &n0);
 
-    /* Node 1: Move forward along corridor to right side */
-    RailNode n1 = { {10.0f, 4.0f}, 0.0f, 0.0f, 1.5f, 0.0f, 1.0f, RAIL_MOVE, -1, "forward" };
+    /* Node 1: Move to middle */
+    RailNode n1 = { {7.0f, 4.0f}, 0.0f, 0.0f, 1.5f, 0.0f, 1.0f, RAIL_MOVE, -1, "mid" };
     RailPath_AddNode(&g_railPath, &n1);
 
     /* Node 2: Wait briefly */
-    RailNode n2 = { {10.0f, 4.0f}, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, RAIL_WAIT, -1, "pause" };
+    RailNode n2 = { {7.0f, 4.0f}, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, RAIL_WAIT, -1, "pause" };
     RailPath_AddNode(&g_railPath, &n2);
 
-    /* Node 3: Turn left to face down */
-    RailNode n3 = { {10.0f, 4.0f}, MK_PI / 2.0f, 0.0f, 1.0f, 0.0f, 1.0f, RAIL_ROTATE, -1, "turn" };
+    /* Node 3: Move to right side */
+    RailNode n3 = { {13.0f, 4.0f}, 0.0f, 0.0f, 1.5f, 0.0f, 1.0f, RAIL_MOVE, -1, "end" };
     RailPath_AddNode(&g_railPath, &n3);
 
-    /* Node 4: Move down the vertical corridor */
-    RailNode n4 = { {10.0f, 11.0f}, MK_PI / 2.0f, 0.0f, 1.5f, 0.0f, 1.0f, RAIL_MOVE, -1, "down" };
+    /* Node 4: Wait at end */
+    RailNode n4 = { {13.0f, 4.0f}, 0.0f, 0.0f, 0.0f, 2.0f, 1.0f, RAIL_WAIT, -1, "wait" };
     RailPath_AddNode(&g_railPath, &n4);
 
-    /* Node 5: Wait at end */
-    RailNode n5 = { {10.0f, 11.0f}, MK_PI / 2.0f, 0.0f, 0.0f, 2.0f, 1.0f, RAIL_WAIT, -1, "end" };
+    /* Node 5: Turn around */
+    RailNode n5 = { {13.0f, 4.0f}, MK_PI, 0.0f, 1.0f, 0.0f, 1.0f, RAIL_ROTATE, -1, "turn" };
     RailPath_AddNode(&g_railPath, &n5);
 
-    /* Node 6: Turn around to face back up */
-    RailNode n6 = { {10.0f, 11.0f}, -MK_PI / 2.0f, 0.0f, 1.0f, 0.0f, 1.0f, RAIL_ROTATE, -1, "turn_back" };
+    /* Node 6: Move back to left */
+    RailNode n6 = { {2.0f, 4.0f}, MK_PI, 0.0f, 1.5f, 0.0f, 1.0f, RAIL_MOVE, -1, "back" };
     RailPath_AddNode(&g_railPath, &n6);
 
-    /* Node 7: Move back up */
-    RailNode n7 = { {10.0f, 4.0f}, -MK_PI / 2.0f, 0.0f, 1.5f, 0.0f, 1.0f, RAIL_MOVE, -1, "up" };
+    /* Node 7: Turn back to forward */
+    RailNode n7 = { {2.0f, 4.0f}, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, RAIL_ROTATE, -1, "turn_fwd" };
     RailPath_AddNode(&g_railPath, &n7);
-
-    /* Node 8: Turn right to face forward again */
-    RailNode n8 = { {10.0f, 4.0f}, MK_PI, 0.0f, 1.0f, 0.0f, 1.0f, RAIL_ROTATE, -1, "turn_around" };
-    RailPath_AddNode(&g_railPath, &n8);
-
-    /* Node 9: Move back to start */
-    RailNode n9 = { {3.0f, 4.0f}, MK_PI, 0.0f, 1.5f, 0.0f, 1.0f, RAIL_MOVE, -1, "back" };
-    RailPath_AddNode(&g_railPath, &n9);
 
     g_railPath.loop = true;
 
