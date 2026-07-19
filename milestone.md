@@ -85,13 +85,16 @@ A retro rail shooter built in C99 with raylib, featuring a DOOM-style 2.5D rayca
 ### Deliverables
 - [x] Enemy state machine: idle, walk, run, attack, shoot, pain, death
 - [x] Basic enemy AI: hearing radius, sight radius, line of sight
-- [x] Enemy spawning from map markers
+- [x] Enemy spawning from code (map marker spawning deferred)
+- [x] Enemy hit detection with configurable radius
+- [x] Enemy health, armor, damage, death system
+- [x] Enemy score value and weak spot multiplier
+- [x] Fallback sprite rendering (colored rectangles when no texture)
 - [ ] 8-direction sprite rendering based on camera angle
 - [ ] Path following and cover points
 - [ ] Random idle behaviors (patrol, look around)
 - [ ] Reaction delay and accuracy system
 - [ ] Enemy weapon variety (pistol, shotgun, melee)
-- [ ] Weak spot / headshot detection
 - [ ] Death animations and corpse sprites
 - [ ] Enemy variety: grunt, soldier, heavy, sniper, melee
 
@@ -107,20 +110,24 @@ A retro rail shooter built in C99 with raylib, featuring a DOOM-style 2.5D rayca
 | Score | 100 | 200 | 500 | 300 | 150 |
 
 ### Acceptance Criteria
-- Enemies spawn from map `E` markers
+- Enemies spawn in open areas (not inside walls)
 - Enemies react to player presence with appropriate states
 - Headshots deal bonus damage when weak spot enabled
 - Death animations play once and leave a corpse sprite
+- Enemy sprites render correctly with depth sorting
 
 ---
 
-## Milestone 4: Scripted Rail Movement ⏳ PENDING
+## Milestone 4: Scripted Rail Movement 🔄 IN PROGRESS
 
 **Goal:** Implement the on-rails camera system with scripted paths and events.
 
 ### Deliverables
 - [x] Rail path node system: position, angle, speed, wait time
 - [x] Camera movement along paths with smooth rotation
+- [x] Wall collision detection on rail path (prevents camera going through walls)
+- [x] Axis sliding when wall collision detected
+- [x] Straight corridor test map for rail path
 - [ ] Full rail path scripting from map files
 - [ ] Camera look targets (lock onto enemies or points)
 - [ ] Scripted events at nodes: spawn, door, sound, explosion
@@ -143,13 +150,14 @@ A retro rail shooter built in C99 with raylib, featuring a DOOM-style 2.5D rayca
 
 ### Acceptance Criteria
 - Camera follows predefined path without player input
+- Camera does not pass through walls (collision detection)
 - Smooth transitions between nodes
 - Events trigger reliably at node boundaries
 - Player can still aim and shoot while moving
 
 ---
 
-## Milestone 5: Events, Bosses, Scoring & First Mission ⏳ PENDING
+## Milestone 5: Events, Bosses, Scoring & First Mission 🔄 IN PROGRESS
 
 **Goal:** Implement the event system, boss battles, scoring, and a complete playable mission.
 
@@ -157,13 +165,18 @@ A retro rail shooter built in C99 with raylib, featuring a DOOM-style 2.5D rayca
 - [x] Event system: 10 event types with trigger volumes
 - [x] Boss struct with multi-phase health
 - [x] Basic boss AI: phase transitions, attack patterns
+- [x] Scoring system: kills, headshots, combos, accuracy
+- [x] Combo multiplier system
+- [x] Arcade rank system: S+, S, A, B, C, D, E
+- [x] Real-time HUD: score, combo, accuracy, health, ammo
+- [x] Weapon switching (number keys + mouse wheel)
+- [x] Reload indicator and "RELOAD!" warning
+- [x] Bullet tracers and impact marks
+- [x] Blood, spark, and explosion particle effects
 - [ ] Boss introduction cutscenes
 - [ ] Boss weak points and helper spawning
 - [ ] Special boss attacks (area denial, rapid fire)
 - [ ] Boss death sequences
-- [ ] Scoring system: kills, headshots, combos, accuracy, speed
-- [ ] Arcade rank system: S+, S, A, B, C, D, E
-- [ ] Combo multiplier and multi-kill bonuses
 - [ ] Secret discovery scoring
 - [ ] Mission complete screen with stats
 - [ ] Continue screen and lives system
@@ -253,4 +266,4 @@ build_debug\MonsterKiller_debug.exe
 
 ---
 
-*Last updated: 2026-07-18*
+*Last updated: 2026-07-20*
